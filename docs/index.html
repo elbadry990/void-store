@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b10">
+    <title>VOID | Gaming Store</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <a class="logo" href="#">VOID<span>.</span></a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#categories">Categories</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="account-button" id="accountButton" type="button">
+                My Account
+            </button>
+
+            <button class="cart-button" id="cartButton" type="button">
+                Cart <span id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <p class="eyebrow">LEVEL UP YOUR SETUP</p>
+                <h1>YOUR GAME.<br>YOUR <span>RULES.</span></h1>
+                <p class="hero-description">
+                    Discover premium gaming gear built for your next level.
+                </p>
+                <a href="#products" class="primary-button">
+                    Explore Products ↗
+                </a>
+            </div>
+
+            <div class="hero-art" aria-hidden="true">
+                <div class="orb"></div>
+                <div class="hero-label">PLAY WITHOUT LIMITS</div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories" id="categories">
+            <div>
+                <p class="eyebrow">FIND YOUR GEAR</p>
+                <h2>Shop by category</h2>
+            </div>
+
+            <div class="category-list">
+                <button class="category active" data-category="all">
+                    All Products
+                </button>
+                <button class="category" data-category="mouse">Mice</button>
+                <button class="category" data-category="keyboard">
+                    Keyboards
+                </button>
+                <button class="category" data-category="headset">
+                    Headsets
+                </button>
+            </div>
+        </section>
+
+        <!-- Products -->
+        <section class="products-section" id="products">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">THE COLLECTION</p>
+                    <h2>Featured gear<span>.</span></h2>
+                </div>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search products..."
+                    aria-label="Search products"
+                >
+            </div>
+
+            <div id="productGrid" class="product-grid">
+                <p class="loading">Loading products...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <a class="logo" href="#">VOID<span>.</span></a>
+        <p>Built for players. Designed for performance.</p>
+        <p>© 2026 VOID Store</p>
+    </footer>
+
+    <!-- Product Details Modal -->
+    <div class="details-overlay" id="detailsOverlay"></div>
+
+    <section class="details-modal" id="detailsModal"
+             role="dialog" aria-modal="true"
+             aria-labelledby="detailsName" aria-hidden="true">
+
+        <button class="details-close" id="detailsClose"
+                type="button" aria-label="Close details">&times;</button>
+
+        <div class="details-image" id="detailsImage">
+            <span class="product-placeholder">🎮</span>
+        </div>
+
+        <div class="details-info">
+            <p class="eyebrow" id="detailsCategory">GAMING GEAR</p>
+            <h2 id="detailsName">Product Name</h2>
+            <p id="detailsDescription"></p>
+            <p class="details-price" id="detailsPrice"></p>
+            <p class="details-stock" id="detailsStock"></p>
+
+            <button class="primary-button" id="detailsAdd" type="button">
+                Add to Cart +
+            </button>
+        </div>
+    </section>
+
+    <!-- Cart -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+        <div class="cart-header">
+            <div>
+                <p class="eyebrow">YOUR SELECTION</p>
+                <h2>Your Cart <span id="drawerCartCount">(0)</span></h2>
+            </div>
+
+            <button class="close-cart" id="closeCart"
+                    type="button" aria-label="Close cart">
+                &times;
+            </button>
+        </div>
+
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <strong id="cartTotal">0 EGP</strong>
+            </div>
+
+            <button class="checkout-button" id="checkoutButton" type="button">
+                Continue to Checkout →
+            </button>
+
+            <p class="cart-note">Secure checkout.</p>
+        </div>
+    </aside>
+
+    <!-- Checkout -->
+    <div class="checkout-overlay" id="checkoutOverlay"></div>
+
+    <section class="checkout-modal" id="checkoutModal"
+             role="dialog" aria-modal="true"
+             aria-labelledby="checkoutTitle" aria-hidden="true">
+
+        <button class="details-close" id="checkoutClose"
+                type="button" aria-label="Close checkout">&times;</button>
+
+        <p class="eyebrow">ALMOST YOURS</p>
+        <h2 id="checkoutTitle">Checkout<span>.</span></h2>
+        <p>Enter your details to place your order.</p>
+
+        <form id="checkoutForm">
+            <label for="customerName">Full name</label>
+            <input id="customerName" name="customer_name"
+                   type="text" autocomplete="name"
+                   required maxlength="255">
+
+            <label for="customerEmail">Email address</label>
+            <input id="customerEmail" name="customer_email"
+                   type="email" autocomplete="email"
+                   required maxlength="255">
+
+            <label for="customerPhone">Phone number</label>
+            <input id="customerPhone" name="customer_phone"
+                   type="tel" autocomplete="tel"
+                   required maxlength="30">
+
+            <label for="customerAddress">Delivery address</label>
+            <textarea id="customerAddress" name="customer_address"
+                      autocomplete="street-address" required></textarea>
+
+            <div id="checkoutMessage" role="status" aria-live="polite"></div>
+
+            <button class="checkout-button" id="placeOrderButton"
+                    type="submit">
+                Place Order
+            </button>
+        </form>
+    </section>
+
+    <!-- Customer Account Modal -->
+    <div class="account-overlay" id="accountOverlay"></div>
+
+    <section class="account-modal" id="accountModal"
+             role="dialog" aria-modal="true"
+             aria-labelledby="accountTitle" aria-hidden="true">
+
+        <button class="details-close" id="accountClose"
+                type="button" aria-label="Close account">&times;</button>
+
+        <p class="eyebrow">WELCOME TO VOID</p>
+        <h2 id="accountTitle">My Account<span>.</span></h2>
+
+        <!-- Login and Registration -->
+        <div id="accountGuest">
+            <div class="account-tabs">
+                <button type="button"
+                        class="account-tab active"
+                        data-auth-tab="login">
+                    Login
+                </button>
+
+                <button type="button"
+                        class="account-tab"
+                        data-auth-tab="register">
+                    Create Account
+                </button>
+            </div>
+
+            <form id="loginForm">
+                <label for="loginEmail">Email address</label>
+                <input id="loginEmail" type="email"
+                       required autocomplete="email">
+
+                <label for="loginPassword">Password</label>
+                <input id="loginPassword" type="password"
+                       required autocomplete="current-password">
+
+                <button class="checkout-button" type="submit">
+                    Login
+                </button>
+            </form>
+
+            <form id="registerForm" hidden>
+                <label for="registerName">Full name</label>
+                <input id="registerName" type="text"
+                       required maxlength="255" autocomplete="name">
+
+                <label for="registerEmail">Email address</label>
+                <input id="registerEmail" type="email"
+                       required maxlength="255" autocomplete="email">
+
+                <label for="registerPassword">Password</label>
+                <input id="registerPassword" type="password"
+                       required minlength="8" autocomplete="new-password">
+
+                <label for="registerPasswordConfirmation">
+                    Confirm password
+                </label>
+
+                <input id="registerPasswordConfirmation"
+                       type="password" required minlength="8"
+                       autocomplete="new-password">
+
+                <button class="checkout-button" type="submit">
+                    Create Account
+                </button>
+            </form>
+        </div>
+
+        <!-- Signed-in Customer -->
+        <div id="accountSignedIn" hidden>
+            <p id="accountWelcome"></p>
+
+            <div class="account-orders-heading">
+                <h3>My Orders</h3>
+
+                <button type="button" id="refreshOrders"
+                        class="account-refresh">
+                    Refresh
+                </button>
+            </div>
+
+            <div id="accountMessage" role="status"></div>
+            <div id="accountOrders"></div>
+
+            <button type="button" id="accountLogout"
+                    class="account-logout">
+                Log Out
+            </button>
+        </div>
+
+        <div id="authMessage" role="status" aria-live="polite"></div>
+    </section>
+
+    <!-- Close Body -->
+</body>
+</html>
